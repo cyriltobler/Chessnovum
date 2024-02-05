@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword #Change your password after first logging
+      MYSQL_DATABASE: ChessAppDatabase
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - my_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+    networks:
+      - my_network
+
+  nodejs:
+    image: node:latest
+    container_name: node_app
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+    command: npm start
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+
+volumes:
+  dbdata:
+
+networks:
+  my_network:
+    driver: bridge
