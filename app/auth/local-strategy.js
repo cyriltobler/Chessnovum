@@ -1,8 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const pool = require('../config/db-config.js');
-const dbRequest = require('../config/db-request.js');
+const pool = require('../db/db-config.js');
+const dbRequest = require('../db/db-request.js');
 
 
 // Set Local Strategy for authentication

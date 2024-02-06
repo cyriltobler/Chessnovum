@@ -1,4 +1,4 @@
-const pool = require('../config/db-config.js');
+const pool = require('./db-config.js');
 
 
 const dbRequest = (query, data, callback) => {

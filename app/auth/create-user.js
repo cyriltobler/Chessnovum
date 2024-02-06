@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const dbRequest = require('../config/db-request.js');
+const dbRequest = require('../db/db-request.js');
 
 
 const createUser = async (userData, callback) => {

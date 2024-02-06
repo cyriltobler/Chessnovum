@@ -1,5 +1,5 @@
 const passport = require('passport');
-const dbRequest = require('../config/db-request.js');
+const dbRequest = require('../db/db-request.js');
 
 
 passport.serializeUser(function (user, done) {
