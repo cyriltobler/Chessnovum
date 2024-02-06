@@ -7,7 +7,6 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    console.log(id)
     const query = "SELECT * FROM `user` WHERE `id` = ?;"
 
 	dbRequest(query, [id], async (success, results)=>{

@@ -14,7 +14,6 @@ const dbRequest = (query, data, callback) => {
             if(error){
                 callback(false, error);
             }
-            console.log(results)
             callback(true, results);
         });
     });

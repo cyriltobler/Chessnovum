@@ -1,6 +1,7 @@
 const socketConnection = (io) => {
     io.on('connection', (socket) => {
-        console.log("Client connected")
+        console.log("Achtung")
+        console.log(socket.request.user)
 
         
 
