@@ -6,12 +6,14 @@ const passport = require('./passport-config.js');
 const createUser = require('./create-user.js');
 const verification = require('../middleware/verification-middleware.js')
 
+const VIEW_PATH = '../../view/';
+
 router.get('/login', verification.checkIfNotAuthenticated, (req, res) => {
-    const filePath = path.join(__dirname, '../../view/auth/login.ejs');
+    const filePath = path.join(__dirname, VIEW_PATH, '/auth/login.ejs');
     res.render(filePath);
 });
 router.get('/register', verification.checkIfNotAuthenticated, (req, res) => {
-    const filePath = path.join(__dirname, '../../view/auth/registration.ejs');
+    const filePath = path.join(__dirname, VIEW_PATH, '/auth/registration.ejs');
     res.render(filePath);
 });
 
