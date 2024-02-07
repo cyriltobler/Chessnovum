@@ -16,7 +16,7 @@ const socketConnection = (io) => {
                 userPool.splice(0, 2);
 
                 gameUsers.forEach(user => {
-                    console.log(user)
+
                     const userSocket = io.sockets.sockets.get(user);
                     userSocket.join(gameID);
                 });
