@@ -1,13 +1,22 @@
-const socket = io();
+import { loadBoard } from './chessboard-config.js';
 
-socket.on("joinGame", (gameID) => {
-    console.log("Game started", gameID);
+export const socket = io();
+export let gameID;
+
+// search Game
+document.getElementById("searchGame-button").onclick = () => {
+    socket.emit("searchGame");
+}
+
+// on game start
+socket.on("joinGame", (id) => {
+    // edit url to game ID
+    const newURL = "/game/" + id;
+    gameID = id;
+    history.pushState(null, null, newURL);
 });
 
 
-document.getElementById("searchGame-button").onclick = () => {
-    console.log("send");
 
-    console.log(socket.id)
-    socket.emit("joinGame");
-}
+
+loadBoard();
