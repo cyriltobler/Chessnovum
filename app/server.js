@@ -69,6 +69,7 @@ const gameRoutes = require('./game/game-routes.js');
 app.use('/', gameRoutes);
 
 const routes = require('./routes.js');
+const { Module } = require('module');
 app.use('/', routes);
 
 
