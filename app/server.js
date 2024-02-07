@@ -32,6 +32,8 @@ app.use(flash());
 const server = http.createServer(app);
 const io = socket(server);
 
+
+// support by https://socket.io/how-to/use-with-passport
 function onlyForHandshake(middleware) {
         return (req, res, next) => {
             const isHandshake = req._query.sid === undefined;
@@ -69,6 +71,8 @@ app.use('/', gameRoutes);
 const routes = require('./routes.js');
 app.use('/', routes);
 
+
+app.use(express.static('public'))
 
 // Start the server
 server.listen(port, () => {
