@@ -6,7 +6,12 @@ const verification = require('../middleware/verification-middleware.js')
 
 const VIEW_PATH = '../../view/';
 
-router.get('/game', verification.checkIfAuthenticated, (req, res) => {
+router.get('/play', verification.checkIfAuthenticated, (req, res) => {
+    const filePath = path.join(__dirname, VIEW_PATH, '/pages/game.ejs');
+    res.render(filePath);
+});
+
+router.get('/game/:gameID', (req, res) => {
     const filePath = path.join(__dirname, VIEW_PATH, '/pages/game.ejs');
     res.render(filePath);
 });

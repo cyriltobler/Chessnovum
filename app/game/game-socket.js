@@ -5,7 +5,7 @@ const userPool = []
 const socketConnection = (io) => {
     io.on('connection', (socket) => {
 
-        socket.on('joinGame', () => {
+        socket.on('searchGame', () => {
             //add user in the pool
             userPool.push(socket.id);
 
@@ -13,15 +13,29 @@ const socketConnection = (io) => {
             if(userPool.length >= 2){
                 const gameID = randomUUID();
                 const gameUsers = userPool.slice(0, 2);
+                let orientation = "white";
                 userPool.splice(0, 2);
 
                 gameUsers.forEach(user => {
 
                     const userSocket = io.sockets.sockets.get(user);
                     userSocket.join(gameID);
+
+                    // send game ID and color
+                    userSocket.emit("joinGame", {
+                        gameID: gameID,
+                        orientation: orientation
+                    });
+
+                    orientation = "black";
                 });
-                io.to(gameID).emit("joinGame", gameID);
             }
+        });
+
+        socket.on('move', (data) => {
+            // TODO: authenticate, if move is right
+
+            io.to(data.gameID).emit("move", data.move)
         });
 
         

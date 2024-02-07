@@ -4,7 +4,7 @@ import { gameID } from './main.js'
 
 const chess = new Chess();
 
-export function onDrop(source, target){
+export function movePiece(source, target){
 
     const move = chess.move({
         from: source,
@@ -16,4 +16,15 @@ export function onDrop(source, target){
     if(move === null){
         return 'snapback';
     };
+
+    // send move toback end
+    sendMove(move)
+}
+
+function sendMove(move){
+    const data = {
+        gameID: gameID,
+        move: move
+    }
+    socket.emit("move", data);
 }
