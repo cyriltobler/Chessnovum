@@ -11,6 +11,13 @@ document.getElementById("searchGame-button").onclick = () => {
     socket.emit("searchGame");
 }
 
+// Confirmation that you are in the queue
+socket.on("addedToQueue", () => {
+    document.getElementById('searchGame-button').style.display = 'none';
+    document.getElementById('game-info').style.display = 'block';
+    document.getElementById('game-info').innerText = 'Spieler suchen...';
+})
+
 // on game start
 socket.on("joinGame", (data) => {
     gameID = data.gameID;

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
+
+
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.4/dist/socket.io.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -11,14 +13,28 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD" crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"
-        integrity="sha512-5nNBISa4noe7B2/Me0iHkkt7mUvXG9xYoeXuSrr8OmCQIxd5+Qwxhjy4npBLIuxGNQKwew/9fEup/f2SUVkkXg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js" integrity="sha512-5nNBISa4noe7B2/Me0iHkkt7mUvXG9xYoeXuSrr8OmCQIxd5+Qwxhjy4npBLIuxGNQKwew/9fEup/f2SUVkkXg==" crossorigin="anonymous" referrerpolicy="no-referrer" type="module"></script>
+
+    <link rel="stylesheet" href="/game/css/layout.css"></link>
+    <link rel="stylesheet" href="/game/css/menu.css"></link>
 </head>
 <body>
-    <button id="searchGame-button">Spiel suchen</button>
+    <header>
+        <%- include('../components/header.ejs')%>
+    </header>
+    <main>
+        <div class="main-content">
+            <div class="left-content">
+                <div id="myBoard" style="width: 400px"></div>
+            </div>
+            <div class="right-content">
+                <h1>Schach</h1>
+                <button id="searchGame-button">Spiel suchen</button>
+                <p id="game-info"></p>
+            </div>
+        </div>
+    </main>
 
-    <div id="myBoard" style="width: 400px"></div>
 
     <script src="/game/js/main.js" type="module"></script>
 </body>
