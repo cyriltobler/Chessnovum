@@ -1,4 +1,4 @@
-const createGame = require('./create-game.js');
+const { createGame, userPool } = require('./create-game.js');
 const validateMove = require('./validate-move.js');
 
 
@@ -11,14 +11,16 @@ const socketConnection = (io) => {
         });
 
         socket.on('move', (data) => {
-            validateMove(io, socket)
+            validateMove(io, socket, data)
         });
 
         
 
 
         socket.on('disconnect', function () {
-            console.log('Client disconnected');
+            // delete user from pool by disconecting
+            const userIndex = userPool.indexOf(socket.id);
+            userPool.splice(userIndex, 1);
         });
     })
 }

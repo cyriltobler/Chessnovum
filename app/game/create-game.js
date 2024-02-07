@@ -46,4 +46,5 @@ const createGame = (io, socket) => {
 }
 
 
-module.exports = createGame;
+module.exports.createGame = createGame;
+module.exports.userPool = userPool;

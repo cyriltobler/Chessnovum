@@ -22,6 +22,9 @@ socket.on("addedToQueue", () => {
 socket.on("joinGame", (data) => {
     gameID = data.gameID;
 
+    //edit info box
+    document.getElementById('game-info').innerText = 'Spiel hat begonnen';
+
     // edit url to game ID
     const newURL = "/game/" + data.gameID;
     history.pushState(null, null, newURL);
