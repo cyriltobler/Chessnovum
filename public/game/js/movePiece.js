@@ -4,21 +4,23 @@ import { gameID } from './main.js'
 
 const chess = new Chess();
 
-export function movePiece(source, target){
+export function movePiece(source, target, sendData){
 
     const move = chess.move({
         from: source,
         to: target,
-        promotion: "q",
+        promotion: "q"
     });
 
     // checkif move isn't legal
     if(move === null){
-        return 'snapback';
+        //return 'snapback';
     };
 
     // send move toback end
-    sendMove(move)
+    if(sendData){
+        sendMove(move)
+    }
 }
 
 function sendMove(move){

@@ -6,7 +6,7 @@ const config = {
     pieceTheme: '/img/chesspieces/{piece}.png',
     draggable: true,
     onDragStart: onDrag,
-    onDrop: movePiece
+    onDrop: (source, target) => movePiece(source, target, true)
 }
 
 export let board;

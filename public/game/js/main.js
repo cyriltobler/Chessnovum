@@ -38,7 +38,7 @@ socket.on("joinGame", (data) => {
 socket.on("move", (move) => {
     // move piece local
     if(move.color === "w" || orientation == "white" && move.color === "b" || orientation == "black"){
-        movePiece(move.from, move.to);
+        movePiece(move.from, move.to, false);
     }
 
     const convertedMove = move.from + "-" + move.to;

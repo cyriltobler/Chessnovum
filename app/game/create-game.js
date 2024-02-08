@@ -10,17 +10,18 @@ const createGame = (io, socket) => {
     if(userPool.length >= 2){
         const gameID = randomUUID();
         const gameUsers = userPool.slice(0, 2);
-        let orientation = "white";
         userPool.splice(0, 2);
 
 
         const query = 'INSERT INTO game SET ?';
-        console.log(socket.request.user[0].ID)
+        let orientation = "white";
+        const startPosition = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
         const gameData = {
             id: gameID,
             blackplayer: io.sockets.sockets.get(gameUsers[0]).request.user[0].ID,
             whiteplayer: io.sockets.sockets.get(gameUsers[1]).request.user[0].ID,
-            gameFinished: 0
+            gameStatus: 0,
+            FEN: startPosition
         }
         dbRequest(query, gameData, async (success, results)=>{
 		    if(!success){

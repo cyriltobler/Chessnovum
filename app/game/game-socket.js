@@ -6,7 +6,7 @@ const socketConnection = (io) => {
     io.on('connection', (socket) => {
 
         socket.on('searchGame', () => {
-            socket.emit("addedToQueue")
+            socket.emit("addedToQueue");
             createGame(io, socket);
         });
 
