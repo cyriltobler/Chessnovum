@@ -35,28 +35,26 @@ const io = socket(server);
 
 // support by https://socket.io/how-to/use-with-passport
 function onlyForHandshake(middleware) {
-        return (req, res, next) => {
-            const isHandshake = req._query.sid === undefined;
-            if (isHandshake) {
-                middleware(req, res, next);
-            } else {
-                next();
-            }
-        };
-    }
-
-    io.engine.use(onlyForHandshake(sessionMiddleware));
-    io.engine.use(onlyForHandshake(passport.session()));
-    io.engine.use(
-    onlyForHandshake((req, res, next) => {
-        if (req.user) {
-            next();
+    return (req, res, next) => {
+        const isHandshake = req._query.sid === undefined;
+        if (isHandshake) {
+            middleware(req, res, next);
         } else {
-            res.writeHead(401);
-            res.end();
+            next();
         }
-    }),
-);
+    };
+}
+
+io.engine.use(onlyForHandshake(sessionMiddleware));
+io.engine.use(onlyForHandshake(passport.session()));
+io.engine.use(onlyForHandshake((req, res, next) => {/*
+    if (req.user) {
+        next();
+    } else {
+        res.writeHead(401);
+        res.end();
+    }*/next();
+}));
 
 socketConnection(io);
 

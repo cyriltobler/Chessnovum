@@ -1,5 +1,6 @@
 const { createGame, userPool } = require('./create-game.js');
 const validateMove = require('./validate-move.js');
+const sendGame = require('./send-game.js');
 
 
 const socketConnection = (io) => {
@@ -14,7 +15,9 @@ const socketConnection = (io) => {
             validateMove(io, socket, data)
         });
 
-        
+        socket.on('getGameData', (gameID, callback) => {
+            sendGame(gameID, socket, callback)
+        });
 
 
         socket.on('disconnect', function () {

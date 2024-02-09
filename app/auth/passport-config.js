@@ -18,7 +18,7 @@ passport.deserializeUser(function (id, done) {
     	if(results.length === 0){
     	    return done(null, false, { message: 'Benutzer nicht gefunden' });
     	}
-        return done(null, results);
+        return done(null, results[0]);
   	});
 });
 

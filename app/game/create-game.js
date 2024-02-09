@@ -18,8 +18,8 @@ const createGame = (io, socket) => {
         const startPosition = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
         const gameData = {
             id: gameID,
-            blackplayer: io.sockets.sockets.get(gameUsers[0]).request.user[0].ID,
-            whiteplayer: io.sockets.sockets.get(gameUsers[1]).request.user[0].ID,
+            blackplayer: io.sockets.sockets.get(gameUsers[0]).request.user.ID,
+            whiteplayer: io.sockets.sockets.get(gameUsers[1]).request.user.ID,
             gameStatus: 0,
             FEN: startPosition
         }

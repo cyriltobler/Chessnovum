@@ -14,8 +14,7 @@ document.getElementById("searchGame-button").onclick = () => {
 // Confirmation that you are in the queue
 socket.on("addedToQueue", () => {
     document.getElementById('searchGame-button').style.display = 'none';
-    document.getElementById('game-info').style.display = 'block';
-    document.getElementById('game-info').innerText = 'Spieler suchen...';
+    document.getElementById('chat-box').innerHTML += '<p class="game-info">Spieler suchen...</p>';
 })
 
 // on game start
@@ -23,7 +22,8 @@ socket.on("joinGame", (data) => {
     gameID = data.gameID;
 
     //edit info box
-    document.getElementById('game-info').innerText = 'Spiel hat begonnen';
+    document.getElementById('chat-box').innerHTML += '<p class="game-info">Spiel hat begonnen</p>';
+    document.getElementById('game-controller').style.display = 'block';
 
     // edit url to game ID
     const newURL = "/game/" + data.gameID;

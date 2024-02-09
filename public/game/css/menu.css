@@ -1,5 +1,6 @@
 #searchGame-button{
-    width: 50%;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
 }
 
 .title{
@@ -8,4 +9,26 @@
 
 .chat-box{
     flex-grow: 1;
+}
+
+.menu-button{
+    color: white;
+    background-color: #7999B2;
+    border: none;
+    border-radius: 0.5rem;
+    
+    cursor: pointer;
+}
+
+.skip-button{
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+.game-info{
+    color: grey;
+}
+
+#game-controller{
+    display: none;
 }
