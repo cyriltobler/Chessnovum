@@ -25,12 +25,13 @@ const validateMove = (io, socket, data) => {
             writeMoveInDB({
                 gameID: data.gameID,
                 FEN: chess.fen(),
-                move: data.move
+                move: data.move,
+                moveNumber: results[0].moveNumber + 1
             });
 
-            io.to(data.gameID).emit("move", data.move)
-        }catch{
-            console.log("invalid move");
+            io.to(data.gameID).emit("move", data.move);
+        }catch(e){
+            console.log(e);
         }
     });
 }
@@ -38,8 +39,8 @@ const validateMove = (io, socket, data) => {
 function writeMoveInDB(gameData){
     const gameID = gameData.gameID
 
-    const query1 = 'UPDATE game SET FEN = ? WHERE id = ?'
-    dbRequest(query1, [gameData.FEN, gameID], async (success, results)=>{
+    const query1 = 'UPDATE game SET FEN = ?, moveNumber = ?  WHERE id = ?'
+    dbRequest(query1, [gameData.FEN, gameData.moveNumber, gameID], async (success, results)=>{
         if(!success){
 			return console.log(results);
 		}
@@ -47,7 +48,7 @@ function writeMoveInDB(gameData){
 
     const moveData = {
         game_fk: gameID,
-        moveNumber: 0,
+        moveNumber: gameData.moveNumber,
         from: gameData.move.from,
         to: gameData.move.to
     }

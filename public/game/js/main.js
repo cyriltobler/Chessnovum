@@ -1,6 +1,6 @@
 import { loadBoard } from './chessboard-config.js';
-import { board } from './chessboard-config.js'
-import{ movePiece } from './movePiece.js'
+import { board } from './chessboard-config.js';
+import{ movePiece } from './movePiece.js';
 
 export const socket = io();
 export let gameID;

@@ -15,8 +15,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js" integrity="sha512-5nNBISa4noe7B2/Me0iHkkt7mUvXG9xYoeXuSrr8OmCQIxd5+Qwxhjy4npBLIuxGNQKwew/9fEup/f2SUVkkXg==" crossorigin="anonymous" referrerpolicy="no-referrer" type="module"></script>
 
+    <link rel="stylesheet" href="/components/main.css"></link>
     <link rel="stylesheet" href="/game/css/layout.css"></link>
     <link rel="stylesheet" href="/game/css/menu.css"></link>
+    <link rel="stylesheet" href="/game/css/endcard.css"></link>
 </head>
 <body>
     <header>
@@ -26,11 +28,25 @@
         <div class="main-content">
             <div class="left-content">
                 <div id="myBoard" style="width: 400px"></div>
+                <div class="endcard" id="endcard">
+                    <button class="close-endcard" onclick="document.getElementById('endcard').style.display = 'none';"></button>
+                    <h4 id="game-end-subtitle">Du hast</h4>
+                    <h2 id="game-end-title">Gewonnen</h2>
+                </div>
             </div>
             <div class="right-content">
-                <h1>Schach</h1>
+                <h1 class="title">Schach</h1>
+                <div class="chat-box">
+
+                </div>
                 <button id="searchGame-button">Spiel suchen</button>
                 <p id="game-info"></p>
+                <div>
+                    <button id="full-backward"><<</button>
+                    <button id="backward"><</button>
+                    <button id="forward">></button>
+                    <button id="full-forward">>></button>
+                </div>
             </div>
         </div>
     </main>
