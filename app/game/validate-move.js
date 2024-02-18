@@ -2,9 +2,6 @@ const { Chess } = require('chess.js');
 const dbRequest = require("../db/db-request");
 
 const validateMove = (io, socket, data) => {
-    // TODO: authenticate user
-
-
     const query = 'SELECT * FROM `game` WHERE `id` = ?;'
 
     dbRequest(query, data.gameID, async (success, results)=>{
@@ -12,9 +9,19 @@ const validateMove = (io, socket, data) => {
 			return;
 		}
 
-        // Chess logic
         const chess = new Chess(results[0].FEN);
 
+        // check user 
+        const userID = socket.request.user.ID;
+        currentPlayer = chess.turn() === 'w' ? 'whiteplayer' : 'blackplayer';
+
+        //check if it is the right player
+        if(results[0][currentPlayer] != userID){
+            return;
+        }
+
+
+        // Chess logic
         try{
             const move = chess.move({
                 from: data.move.from,

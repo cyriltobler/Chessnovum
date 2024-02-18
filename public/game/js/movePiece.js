@@ -14,7 +14,8 @@ export function movePiece(source, target, sendData){
     const move = chess.move({
         from: source,
         to: target,
-        promotion: "q"
+        promotion: "q",
+        strict: false
     });
 
     // checkif move isn't legal
@@ -28,10 +29,7 @@ export function movePiece(source, target, sendData){
     }
 
     //update view
-    addMoveToHistory({
-        from: source,
-        to: target
-    })
+    addMoveToHistory(chess)
     gameStatus();
     board.position(chess.fen())
 }
