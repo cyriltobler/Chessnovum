@@ -8,6 +8,7 @@ let orientation;
 
 // search Game
 document.getElementById("searchGame-button").onclick = () => {
+    console.log(socket.id)
     socket.emit("searchGame");
 }
 

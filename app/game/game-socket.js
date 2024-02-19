@@ -23,7 +23,9 @@ const socketConnection = (io) => {
         socket.on('disconnect', function () {
             // delete user from pool by disconecting
             const userIndex = userPool.indexOf(socket.id);
-            userPool.splice(userIndex, 1);
+            if(userIndex !== -1){
+                userPool.splice(userIndex, 1);
+            }
         });
     })
 }
