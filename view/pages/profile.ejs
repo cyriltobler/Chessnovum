@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/game/css/chessboard.css"></link>
+    <link rel="stylesheet" href="/profile/css/chessboard.css"></link>
+</head>
+<body>
+    <header>
+        <%- include('../components/header.ejs')%>
+    </header>
+
+    <article>
+        <h2>Namen</h2>
+    </article>
+
+    <article>
+        <h2>Aktuelle Partien</h2>
+        <section id="last-games" class="chessboard-wrapper"></section>
+    </article>
+
+    <article>
+        <h2>Beendete Partien</h2>
+        <section id="old-games" class="chessboard-wrapper"></section>
+    </article>
+
+
+    <script src="/profile/js/getGames.js"></script>
+</body>
+</html>

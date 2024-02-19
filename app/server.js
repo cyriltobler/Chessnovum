@@ -10,7 +10,7 @@ const passport = require('./auth/passport-config.js');
 const socketConnection = require('./game/game-socket.js');
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 
 // activate ejs
@@ -66,8 +66,10 @@ app.use('/auth', authRoutes);
 const gameRoutes = require('./game/game-routes.js');
 app.use('/', gameRoutes);
 
+const profileRoutes = require('./profile/profile-routes.js');
+app.use('/', profileRoutes);
+
 const routes = require('./routes.js');
-const { Module } = require('module');
 app.use('/', routes);
 
 
