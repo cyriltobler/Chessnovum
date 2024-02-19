@@ -43,5 +43,23 @@ socket.on("move", ({move, fen}) => {
     }
 });
 
+//on reload
+gameID = window.location.pathname.split('/')[2]
+if(gameID !== undefined){
+    socket.emit("getGameData", gameID, (gameData) => {
+    // send chat message
+    document.getElementById('chat-box').innerHTML += '<p class="game-info">Neu verbunden</p>';
+    document.getElementById('game-controller').style.display = 'block';
+
+    //turn chessboard
+    board.orientation(gameData.orientation);
+    orientation = gameData.orientation;
+    
+    //move pieces
+    gameData.moves.forEach(move => {
+        updateBoard(move.FEN);
+    });
+});
+}
 
 loadBoard();

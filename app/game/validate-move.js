@@ -56,8 +56,7 @@ function writeMoveInDB(gameData){
     const moveData = {
         game_fk: gameID,
         moveNumber: gameData.moveNumber,
-        from: gameData.move.from,
-        to: gameData.move.to
+        FEN: gameData.FEN
     }
     const query2 = 'INSERT INTO move SET ?'
     dbRequest(query2, moveData, async (success, results)=>{
