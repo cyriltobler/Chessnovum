@@ -26,7 +26,7 @@ const validateMove = (io, socket, data) => {
             const move = chess.move({
                 from: data.move.from,
                 to: data.move.to,
-                promotion: 'q'
+                promotion: data.move.promotion
             });
 
             writeMoveInDB({
@@ -36,7 +36,7 @@ const validateMove = (io, socket, data) => {
                 moveNumber: results[0].moveNumber + 1
             });
 
-            io.to(data.gameID).emit("move", data.move);
+            io.to(data.gameID).emit("move", {move: data.move, fen: chess.fen()});
         }catch(e){
             console.log(e);
         }

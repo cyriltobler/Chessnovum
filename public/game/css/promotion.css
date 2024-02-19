@@ -1,0 +1,27 @@
+.promotion-card{
+    position: absolute;
+
+    display: none;
+}
+
+.promotion-button{
+    width: 50px;
+    height: 50px;
+
+    background-size: cover;
+
+    border: black solid 2px;
+    cursor: pointer;
+}
+#promotion-button-q{
+    background-image: url('/img/chesspieces/bQ.png');
+}
+#promotion-button-r {
+    background-image: url('/img/chesspieces/bR.png');
+}
+#promotion-button-b {
+    background-image: url('/img/chesspieces/bB.png');
+}
+#promotion-button-k {
+    background-image: url('/img/chesspieces/bK.png');
+}

@@ -1,6 +1,6 @@
 import { loadBoard } from './chessboard-config.js';
 import { board } from './chessboard-config.js';
-import{ movePiece } from './movePiece.js';
+import{ updateBoard } from './movePiece.js';
 
 export const socket = io();
 export let gameID;
@@ -35,14 +35,11 @@ socket.on("joinGame", (data) => {
 
 
 // on new move
-socket.on("move", (move) => {
+socket.on("move", ({move, fen}) => {
     // move piece local
-    if(move.color === "w" || orientation == "white" && move.color === "b" || orientation == "black"){
-        movePiece(move.from, move.to, false);
+    if((move.color !== "w" || orientation !== "white") && (move.color !== "b" || orientation !== "black")){
+        updateBoard(fen);
     }
-
-    const convertedMove = move.from + "-" + move.to;
-    board.move(convertedMove);
 });
 
 

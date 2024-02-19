@@ -1,7 +1,7 @@
 import { board } from './chessboard-config.js'
 
 const moves = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
-let displayedMove = 0;
+let displayedMove = 1;
 
 document.getElementById("forward").onclick = () => {
     if(displayedMove < moves.length - 1){
@@ -29,6 +29,7 @@ export function fullForward(){
 }
 
 
-export function addMoveToHistory(move){
-    moves.push(move.fen());
+export function addMoveToHistory(fen){
+    moves.push(fen);
+    displayedMove++;
 }

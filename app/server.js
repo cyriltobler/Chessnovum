@@ -10,7 +10,7 @@ const passport = require('./auth/passport-config.js');
 const socketConnection = require('./game/game-socket.js');
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 
 // activate ejs

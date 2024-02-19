@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="/game/css/layout.css"></link>
     <link rel="stylesheet" href="/game/css/menu.css"></link>
     <link rel="stylesheet" href="/game/css/endcard.css"></link>
-    <link rel="stylesheet" href="/game/css/chessboard.css">
-    </link>
+    <link rel="stylesheet" href="/game/css/chessboard.css"></link>
+    <link rel="stylesheet" href="/game/css/promotion.css"></link>
 </head>
 <body>
     <header>
@@ -34,6 +34,12 @@
                     <button class="close-endcard" onclick="document.getElementById('endcard').style.display = 'none';"></button>
                     <h4 id="game-end-subtitle">Du hast</h4>
                     <h2 id="game-end-title">Gewonnen</h2>
+                </div>
+                <div class="promotion-card" id="promotion-card">
+                    <button class="promotion-button" id="promotion-button-q"></button>
+                    <button class="promotion-button" id="promotion-button-r"></button>
+                    <button class="promotion-button" id="promotion-button-b"></button>
+                    <button class="promotion-button" id="promotion-button-k"></button>
                 </div>
             </div>
             <div class="right-content">

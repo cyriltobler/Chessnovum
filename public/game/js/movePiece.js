@@ -14,8 +14,7 @@ export function movePiece(source, target, sendData){
     const move = chess.move({
         from: source,
         to: target,
-        promotion: "q",
-        strict: false
+        promotion: "q"
     });
 
     // checkif move isn't legal
@@ -23,13 +22,33 @@ export function movePiece(source, target, sendData){
         return 'snapback';
     };
 
-    // send move toback end
-    if(sendData){
-        sendMove(move)
+    //check if promotion
+    if (move.promotion && sendData){
+        //makemove with promotion
+        askPromotion(updateMove, chess, source, target);
+    }else{
+        updateMove(move)
     }
 
-    //update view
-    addMoveToHistory(chess)
+    function updateMove(move){
+        // send move to backend
+        if(sendData){
+            sendMove(move)
+        }
+
+        //update view
+        addMoveToHistory(chess.fen())
+        gameStatus();
+        board.position(chess.fen())
+    }
+}
+
+export function updateBoard(fen){
+    fullForward();
+
+    chess.load(fen)
+
+    addMoveToHistory(chess.fen())
     gameStatus();
     board.position(chess.fen())
 }
@@ -56,4 +75,27 @@ function sendMove(move){
         move: move
     }
     socket.emit("move", data);
+}
+
+function askPromotion(updateMove, chess, source, target, move){
+    chess.undo();
+    document.getElementById('promotion-card').style.display = 'block';
+
+    const promotionButtons = document.querySelectorAll('.promotion-button');
+    promotionButtons.forEach(button => {
+        button.addEventListener('click', handlePromotion);
+    });
+
+    function handlePromotion(event){
+        document.getElementById('promotion-card').style.display = 'none';
+        const promotionPiece = event.target.id.split('-')[2];
+
+        move = chess.move({
+            from: source,
+            to: target,
+            promotion: promotionPiece
+        });
+
+        updateMove(move)
+    }
 }
