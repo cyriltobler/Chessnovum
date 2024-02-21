@@ -28,6 +28,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.username = req.isAuthenticated() ? req.user.username : null;
+    next();
+});
+
 // Create Socket Server and load socketConnection
 const server = http.createServer(app);
 const io = socket(server);

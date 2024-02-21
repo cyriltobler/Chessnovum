@@ -27,6 +27,12 @@ router.post('/register', (req, res)=>{
         res.send(results)
     })
 });
+router.delete('/logout', (req, res)=>{
+    req.logout((err) => {
+        if (err) { return next(err); }
+    });
+    res.status(204);
+});
 
 
 

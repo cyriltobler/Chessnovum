@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/components/main.css"></link>
 <link rel="stylesheet" href="/components/header/header.css"></link>
+<link rel="stylesheet" href="/components/header/dropdown.css"></link>
 
 <div class="header-container">
     <div class="header-box-left">
@@ -9,9 +10,33 @@
         <a href="#">Freunde</a>
         <a href="/play">Spielen</a>
     </div>
-    <div class="header-box-right">
+    <div class="header-box-right dropdown">
         <button>
             <img src="/img/svg/account.svg" id="header-profile">
         </button>
+        <div class="dropdown-content">
+
+            <img src="/img/svg/account.svg" id="header-profile">
+            <% if (username === null) { %>
+                <a href="/auth/register">Registrieren</a>
+                <a href="/auth/login">Login</a>
+            <% } else { %>
+                <a href="/profile/@<%= username %>">Profile</a>
+                <a href="javascript:void(0);" onclick="logout()">Logout</a>
+            <% } %>
+        </div>
     </div>
 </div>
+
+<script>
+    function logout(){
+        fetch('/auth/logout', {method: 'DELETE'}).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            location.reload();
+        }).catch(error => {
+            alert('Fehler beim aus loggen: ' + error)
+        });
+    }
+</script>

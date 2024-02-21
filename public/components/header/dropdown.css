@@ -1,0 +1,22 @@
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 99;
+
+    right: 0px;
+    top: 0px;
+
+    padding: 1rem;
+
+    background-color: blue;
+}
+
+.dropdown-content a{
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}

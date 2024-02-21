@@ -13,10 +13,10 @@ async function getGames(){
 
 function createNewBoard(game, htmlContainer, i){
     htmlContainer.innerHTML += `
-    <div class="chessboard-box">
+    <a class="chessboard-box" href="/game/${game.id}">
         <div id="myBoard${i}" style="width: 200px"></div>
         <h3>${game.opponent}</h3>
-    <div>`
+    <a>`
 
     const config = {
         position: game.fen,

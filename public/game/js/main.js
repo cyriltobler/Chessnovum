@@ -48,6 +48,7 @@ gameID = window.location.pathname.split('/')[2]
 if(gameID !== undefined){
     socket.emit("getGameData", gameID, (gameData) => {
     // send chat message
+    document.getElementById('searchGame-button').style.display = 'none';
     document.getElementById('chat-box').innerHTML += '<p class="game-info">Neu verbunden</p>';
     document.getElementById('game-controller').style.display = 'block';
 
