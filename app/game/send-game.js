@@ -1,4 +1,4 @@
-const dbRequest = require('../db/db-request.js');
+const dbRequest = require('../db/db-request');
 
 const sendGame = (gameID, socket, callback) => {
     let moves;
@@ -7,42 +7,42 @@ const sendGame = (gameID, socket, callback) => {
 
     socket.join(gameID);
 
-    const query1 = 'SELECT * FROM `move` WHERE `game_fk` = ?;'
-    dbRequest(query1, gameID, async (success, results)=>{
-		if(!success){
-            return console.log("error")
+    function sendData() {
+        if (sendDataCounter >= 2) {
+            callback({ moves, orientation });
         }
-        moves = results
-        sendDataCounter++;
-        sendData()
-  	});
+    }
 
-    if(socket.request.user?.ID !== undefined){
-        const query2 = 'SELECT * FROM `game` WHERE `id` = ?;'
-        dbRequest(query2, gameID, async (success, results)=>{
-            if(!success){
-                return console.log("error")
+    const query1 = 'SELECT * FROM `move` WHERE `game_fk` = ?;';
+    dbRequest(query1, gameID, async (success, results) => {
+        if (!success) {
+            return console.log('error');
+        }
+        moves = results;
+        sendDataCounter++;
+        return sendData();
+    });
+
+    if (socket.request.user?.ID !== undefined) {
+        const query2 = 'SELECT * FROM `game` WHERE `id` = ?;';
+        dbRequest(query2, gameID, async (success, results) => {
+            if (!success) {
+                return console.log('error');
             }
 
             sendDataCounter++;
-            if(results[0].blackplayer === socket.request.user.ID){
+            if (results[0].blackplayer === socket.request.user.ID) {
                 orientation = 'black';
-                sendData()
-            }else{
-                orientation = 'white';
-                sendData()
+                return sendData();
             }
-  	    });
-    }else{
-        sendDataCounter++;
-        sendData()
-    }
 
-    function sendData(){
-        if(sendDataCounter >= 2){
-            callback({moves: moves, orientation: orientation});
-        }
+            orientation = 'white';
+            return sendData();
+        });
+    } else {
+        sendDataCounter++;
+        sendData();
     }
-}
+};
 
 module.exports = sendGame;

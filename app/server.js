@@ -1,29 +1,28 @@
 const express = require('express');
-const http = require('http')
+const http = require('http');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
-const socket = require('socket.io')
+const socket = require('socket.io');
 require('dotenv').config();
 
-const passport = require('./auth/passport-config.js');
-const socketConnection = require('./game/game-socket.js');
+const passport = require('./auth/passport-config');
+const socketConnection = require('./game/game-socket');
 
 const app = express();
 const port = 3000;
 
-
 // activate ejs
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 // Load middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 const sessionMiddleware = session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
 });
-app.use(sessionMiddleware)
+app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -37,10 +36,10 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 const io = socket(server);
 
-
 // support by https://socket.io/how-to/use-with-passport
 function onlyForHandshake(middleware) {
     return (req, res, next) => {
+        // eslint-disable-next-line no-underscore-dangle
         const isHandshake = req._query.sid === undefined;
         if (isHandshake) {
             middleware(req, res, next);
@@ -52,33 +51,30 @@ function onlyForHandshake(middleware) {
 
 io.engine.use(onlyForHandshake(sessionMiddleware));
 io.engine.use(onlyForHandshake(passport.session()));
-io.engine.use(onlyForHandshake((req, res, next) => {/*
-    if (req.user) {
+io.engine.use(onlyForHandshake((req, res, next) => {
+    /* if (req.user) {
         next();
     } else {
         res.writeHead(401);
         res.end();
-    }*/next();
+    } */
+    next();
 }));
 
 socketConnection(io);
 
-
 // import other routes
-const authRoutes = require('./auth/auth-routes.js');
+const authRoutes = require('./auth/auth-routes');
+const gameRoutes = require('./game/game-routes');
+const profileRoutes = require('./profile/profile-routes');
+const routes = require('./routes');
+
 app.use('/auth', authRoutes);
-
-const gameRoutes = require('./game/game-routes.js');
 app.use('/', gameRoutes);
-
-const profileRoutes = require('./profile/profile-routes.js');
 app.use('/', profileRoutes);
-
-const routes = require('./routes.js');
 app.use('/', routes);
 
-
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Start the server
 server.listen(port, () => {

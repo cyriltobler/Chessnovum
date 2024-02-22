@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 require('dotenv').config();
 
-
 const pool = mysql.createPool({
     host: 'db',
     user: process.env.MYSQL_USER,
@@ -9,7 +8,7 @@ const pool = mysql.createPool({
     database: 'ChessAppDatabase',
     waitForConnections: true,
     connectionLimit: 20,
-    queueLimit: 0
+    queueLimit: 0,
 });
 
 module.exports = pool;

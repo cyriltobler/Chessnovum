@@ -1,24 +1,34 @@
-const dbRequest = require("../db/db-request");
+const dbRequest = require('../db/db-request');
+
+function asyncDbRequest(query, values) {
+    return new Promise((resolve, reject) => {
+        dbRequest(query, values, async (success, results) => {
+            if (!success) {
+                reject(results);
+            }
+            resolve(results);
+        });
+    });
+}
 
 const sendProfile = async (req, res) => {
     const profileJSON = [];
-    
-    try{
-        const userDataByUsernameQuery = 'SELECT * FROM `user` WHERE `username` = ?;'
-        const user = await asyncDbRequest(userDataByUsernameQuery, req.params.username)
-        if(user.length === 0){
-            return res.status(404).send('user not found')
+
+    try {
+        const userDataByUsernameQuery = 'SELECT * FROM `user` WHERE `username` = ?;';
+        const user = await asyncDbRequest(userDataByUsernameQuery, req.params.username);
+        if (user.length === 0) {
+            return res.status(404).send('user not found');
         }
-        const userID = user[0].ID
+        const userID = user[0].ID;
 
-        
-        const gamesFromUserQuery = 'SELECT * FROM `game` WHERE `blackplayer` = ? OR `whiteplayer` = ?;'
-        const gamesFromUser = await asyncDbRequest(gamesFromUserQuery, [userID, userID])
+        const gamesFromUserQuery = 'SELECT * FROM `game` WHERE `blackplayer` = ? OR `whiteplayer` = ?;';
+        const gamesFromUser = await asyncDbRequest(gamesFromUserQuery, [userID, userID]);
 
-        const userDataByIDQuery = 'SELECT * FROM `user` WHERE `ID` = ?;'
-        const otherplayers = await Promise.all(gamesFromUser.map(game => {
+        const userDataByIDQuery = 'SELECT * FROM `user` WHERE `ID` = ?;';
+        const otherplayers = await Promise.all(gamesFromUser.map((game) => {
             const otherPlayerID = game.blackplayer === userID ? game.whiteplayer : game.blackplayer;
-            return asyncDbRequest(userDataByIDQuery, otherPlayerID)
+            return asyncDbRequest(userDataByIDQuery, otherPlayerID);
         }));
 
         gamesFromUser.forEach((game, index) => {
@@ -27,27 +37,15 @@ const sendProfile = async (req, res) => {
                 fen: game.FEN,
                 opponent: otherplayers[index][0].username,
                 gameStatus: game.gameStatus,
-                colorWhite: game.whiteplayer === userID
-            }
-            profileJSON.push(allGameData)
-        })
-        res.json(profileJSON)
-    }catch(error){
-        console.log(error)
-        res.status(500).send("Server Error");
+                colorWhite: game.whiteplayer === userID,
+            };
+            profileJSON.push(allGameData);
+        });
+        return res.json(profileJSON);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send('Server Error');
     }
-}
-
-function asyncDbRequest(query, values){
-    return new Promise((resolve, reject) => {
-        dbRequest(query, values, async (success, results)=>{
-            if(!success){
-                reject(results);
-            }
-            resolve(results);
-        })
-    })
-}
-
+};
 
 module.exports = sendProfile;

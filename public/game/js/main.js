@@ -7,60 +7,59 @@ export let gameID;
 let orientation;
 
 // search Game
-document.getElementById("searchGame-button").onclick = () => {
-    console.log(socket.id)
-    socket.emit("searchGame");
-}
+document.getElementById('searchGame-button').onclick = () => {
+    console.log(socket.id);
+    socket.emit('searchGame');
+};
 
 // Confirmation that you are in the queue
-socket.on("addedToQueue", () => {
+socket.on('addedToQueue', () => {
     document.getElementById('searchGame-button').style.display = 'none';
     document.getElementById('chat-box').innerHTML += '<p class="game-info">Spieler suchen...</p>';
-})
+});
 
 // on game start
-socket.on("joinGame", (data) => {
+socket.on('joinGame', (data) => {
     gameID = data.gameID;
 
-    //edit info box
+    // edit info box
     document.getElementById('chat-box').innerHTML += '<p class="game-info">Spiel hat begonnen</p>';
     document.getElementById('game-controller').style.display = 'block';
 
     // edit url to game ID
-    const newURL = "/game/" + data.gameID;
+    const newURL = `/game/${data.gameID}`;
     history.pushState(null, null, newURL);
 
-    board.orientation(data.orientation)
+    board.orientation(data.orientation);
     orientation = data.orientation;
 });
 
-
 // on new move
-socket.on("move", ({move, fen}) => {
+socket.on('move', ({move, fen}) => {
     // move piece local
-    if((move.color !== "w" || orientation !== "white") && (move.color !== "b" || orientation !== "black")){
+    if ((move.color !== 'w' || orientation !== 'white') && (move.color !== 'b' || orientation !== 'black')) {
         updateBoard(fen);
     }
 });
 
-//on reload
-gameID = window.location.pathname.split('/')[2]
-if(gameID !== undefined){
-    socket.emit("getGameData", gameID, (gameData) => {
-    // send chat message
-    document.getElementById('searchGame-button').style.display = 'none';
-    document.getElementById('chat-box').innerHTML += '<p class="game-info">Neu verbunden</p>';
-    document.getElementById('game-controller').style.display = 'block';
+// on reload
+gameID = window.location.pathname.split('/')[2];
+if (gameID !== undefined) {
+    socket.emit('getGameData', gameID, (gameData) => {
+        // send chat message
+        document.getElementById('searchGame-button').style.display = 'none';
+        document.getElementById('chat-box').innerHTML += '<p class="game-info">Neu verbunden</p>';
+        document.getElementById('game-controller').style.display = 'block';
 
-    //turn chessboard
-    board.orientation(gameData.orientation);
-    orientation = gameData.orientation;
-    
-    //move pieces
-    gameData.moves.forEach(move => {
-        updateBoard(move.FEN);
+        // turn chessboard
+        board.orientation(gameData.orientation);
+        orientation = gameData.orientation;
+
+        // move pieces
+        gameData.moves.forEach((move) => {
+            updateBoard(move.FEN);
+        });
     });
-});
 }
 
 loadBoard();

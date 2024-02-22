@@ -1,10 +1,10 @@
 const config = {
     position: 'start',
     pieceTheme: '/img/chesspieces/{piece}.png',
-    draggable: false
-}
+    draggable: false,
+};
 
 export let board;
-export function loadBoard(){
+export function loadBoard() {
     board = Chessboard('myBoard', config);
 }

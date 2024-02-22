@@ -1,17 +1,16 @@
 const checkIfNotAuthenticated = (req, res, next) => {
-    if(req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         return res.redirect('/');
     }
-    next();
-}
+    return next();
+};
 
 const checkIfAuthenticated = (req, res, next) => {
-    if(!req.isAuthenticated()) {
+    if (!req.isAuthenticated()) {
         return res.redirect('/auth/login');
     }
-    next();
-}
-
+    return next();
+};
 
 module.exports.checkIfAuthenticated = checkIfAuthenticated;
 module.exports.checkIfNotAuthenticated = checkIfNotAuthenticated;

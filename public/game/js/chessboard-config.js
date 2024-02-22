@@ -6,10 +6,10 @@ const config = {
     pieceTheme: '/img/chesspieces/{piece}.png',
     draggable: true,
     onDragStart: onDrag,
-    onDrop: (source, target) => movePiece(source, target, true)
-}
+    onDrop: (source, target) => movePiece(source, target, true),
+};
 
 export let board;
-export function loadBoard(){
+export function loadBoard() {
     board = Chessboard('myBoard', config);
-}
+};

@@ -8,7 +8,7 @@ export const socket = io();
 loadBoard();
 
 // on new move
-socket.on("move", ({move, fen}) => {
+socket.on('move', ({ move, fen }) => {
     // move piece local
     fullForward();
     addMoveToHistory(fen);
@@ -16,12 +16,12 @@ socket.on("move", ({move, fen}) => {
 });
 
 const gameID = window.location.pathname.split('/')[2]
-socket.emit("getGameData", gameID, (gameData) => {
+socket.emit('getGameData', gameID, (gameData) => {
     // send chat message
     document.getElementById('chat-box').innerHTML += '<p class="game-info">Live übertragung gestartet</p>';
     document.getElementById('game-controller').style.display = 'block';
-    
-    gameData.moves.forEach(move => {
+
+    gameData.moves.forEach((move) => {
         addMoveToHistory(move.FEN);
         board.position(move.FEN);
     });

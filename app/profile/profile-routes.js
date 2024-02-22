@@ -1,8 +1,9 @@
 const express = require('express');
-const router = express.Router();
 const path = require('path');
 
-const sendProfile = require('./send-profile.js')
+const router = express.Router();
+
+const sendProfile = require('./send-profile');
 
 const VIEW_PATH = '../../view/';
 
@@ -17,8 +18,5 @@ router.get('/profile/notfound', (req, res) => {
 });
 
 router.get('/api/profile/:username', sendProfile);
-
-
-
 
 module.exports = router;
