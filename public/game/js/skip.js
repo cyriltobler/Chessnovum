@@ -21,7 +21,7 @@ document.getElementById('full-forward').onclick = () => {
 document.getElementById('full-backward').onclick = () => {
     board.position(moves[0]);
     displayedMove = 0;
-}
+};
 
 export function fullForward() {
     board.position(moves[moves.length - 1]);

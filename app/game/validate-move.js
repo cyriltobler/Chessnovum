@@ -1,9 +1,11 @@
 const { Chess } = require('chess.js');
 const dbRequest = require('../db/db-request');
 
+// update the game
 function writeMoveInDB(gameData) {
     const { gameID } = gameData;
 
+    // update the game entry
     const query1 = 'UPDATE game SET FEN = ?, moveNumber = ?, gameStatus = ?  WHERE id = ?';
     const query1Data = [gameData.FEN, gameData.moveNumber, gameData.gameStatus, gameID];
     dbRequest(query1, query1Data, async (success, results) => {
@@ -13,12 +15,13 @@ function writeMoveInDB(gameData) {
         return true;
     });
 
+    // add a new move to the DB
+    const query2 = 'INSERT INTO move SET ?';
     const moveData = {
         game_fk: gameID,
         moveNumber: gameData.moveNumber,
         FEN: gameData.FEN,
     };
-    const query2 = 'INSERT INTO move SET ?';
     dbRequest(query2, moveData, async (success, results) => {
         if (!success) {
             return console.log(results);
@@ -27,6 +30,7 @@ function writeMoveInDB(gameData) {
     });
 }
 
+// check if the game is finished, and who won
 function gameStatus(chess) {
     if (chess.isCheckmate()) {
         if (chess.turn() === 'w') {

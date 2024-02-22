@@ -1,12 +1,15 @@
 const dbRequest = require('../db/db-request');
 
+// send allmoves froma game
 const sendGame = (gameID, socket, callback) => {
     let moves;
     let orientation = null;
     let sendDataCounter = 0;
 
+    // add user to the livestream
     socket.join(gameID);
 
+    // send data after the two DB requests
     function sendData() {
         if (sendDataCounter >= 2) {
             callback({ moves, orientation });

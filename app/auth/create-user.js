@@ -4,8 +4,8 @@ const dbRequest = require('../db/db-request');
 function writeUserInDB(counter, user, callback) {
     if (counter < 2) return;
 
+    // write the new user in the DB
     const query = 'INSERT INTO user SET ?';
-
     dbRequest(query, user, async (success, results) => {
         if (!success) {
             return callback(false, results);
@@ -22,12 +22,14 @@ const createUser = async (userData, callback) => {
         callback(false, 'Geben Sie bitte Benutzername, Email und Passwort an.');
     }
 
+    // prepare userdata and hash passwort
     const user = {
         username: userData.username,
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
     };
 
+    // check if username or email allready exist
     const query1 = 'SELECT * FROM `user` WHERE `email` = ?;';
     const query2 = 'SELECT * FROM `user` WHERE `username` = ?;';
 
@@ -36,20 +38,17 @@ const createUser = async (userData, callback) => {
             return callback(false, results);
         }
 
-        // check if user allready exist
         if (results.length !== 0) {
             return callback(false, 'Email bereits vergeben');
         }
         counter++;
         return writeUserInDB(counter, user, callback);
     });
-
     dbRequest(query2, [user.username], async (success, results) => {
         if (!success) {
             return callback(false, results);
         }
 
-        // check if user allready exist
         if (results.length !== 0) {
             return callback(false, 'Benutzername bereits vergeben');
         }

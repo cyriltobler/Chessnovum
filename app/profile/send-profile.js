@@ -1,5 +1,6 @@
 const dbRequest = require('../db/db-request');
 
+// create a async DB request
 function asyncDbRequest(query, values) {
     return new Promise((resolve, reject) => {
         dbRequest(query, values, async (success, results) => {
@@ -15,6 +16,7 @@ const sendProfile = async (req, res) => {
     const profileJSON = [];
 
     try {
+        // gather data from user
         const userDataByUsernameQuery = 'SELECT * FROM `user` WHERE `username` = ?;';
         const user = await asyncDbRequest(userDataByUsernameQuery, req.params.username);
         if (user.length === 0) {
@@ -41,6 +43,8 @@ const sendProfile = async (req, res) => {
             };
             profileJSON.push(allGameData);
         });
+
+        // send Data as a json as response
         return res.json(profileJSON);
     } catch (error) {
         console.log(error);

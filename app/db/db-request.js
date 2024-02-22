@@ -1,5 +1,6 @@
 const pool = require('./db-config');
 
+// standard DB request
 const dbRequest = (query, data, callback) => {
     pool.getConnection((error, connection) => {
         if (error) {

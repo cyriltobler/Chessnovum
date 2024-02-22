@@ -1,7 +1,7 @@
 import { Chess } from 'https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js';
-import { board } from './chessboard-config';
-import { socket, gameID } from './main';
-import { addMoveToHistory, fullForward } from './skip';
+import { board } from './chessboard-config.js';
+import { socket, gameID } from './main.js';
+import { addMoveToHistory, fullForward } from './skip.js';
 
 const chess = new Chess();
 

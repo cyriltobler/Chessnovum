@@ -2,6 +2,7 @@ const { createGame, userPool } = require('./create-game');
 const validateMove = require('./validate-move');
 const sendGame = require('./send-game');
 
+// handle all socket.io events
 const socketConnection = (io) => {
     io.on('connection', (socket) => {
         socket.on('searchGame', () => {

@@ -5,8 +5,8 @@ const dbRequest = require('../db/db-request');
 
 // Set Local Strategy for authentication
 const localStrategy = new LocalStrategy(async (email, password, done) => {
+    // search user in DB
     const query = 'SELECT * FROM `user` WHERE `email` = ?;';
-
     dbRequest(query, [email], async (success, results) => {
         if (!success) {
             return done(results);
