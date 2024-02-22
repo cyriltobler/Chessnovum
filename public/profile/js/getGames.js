@@ -5,10 +5,16 @@ async function getGames(){
     const games = await response.json();
     
     games.forEach((game, i) => {
-        const htmlContainer = document.getElementById('last-games')
+        let htmlContainer
+        if(game.gameStatus !== 0){
+            htmlContainer = document.getElementById('old-games')
+        }else{
+            htmlContainer = document.getElementById('last-games')
+        }
 
         createNewBoard(game, htmlContainer, i)
     });
+    createStatistics(games)
 }
 
 function createNewBoard(game, htmlContainer, i){
@@ -16,7 +22,7 @@ function createNewBoard(game, htmlContainer, i){
     <a class="chessboard-box" href="/game/${game.id}">
         <div id="myBoard${i}" style="width: 200px"></div>
         <h3>${game.opponent}</h3>
-    <a>`
+    </a>`
 
     const config = {
         position: game.fen,
@@ -25,6 +31,9 @@ function createNewBoard(game, htmlContainer, i){
         showNotation: false
     }
     const board = Chessboard('myBoard' + i, config);
+    if(!game.colorWhite){
+        board.orientation('black')
+    }
 }
 
 

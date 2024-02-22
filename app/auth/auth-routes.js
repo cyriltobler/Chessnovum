@@ -29,9 +29,9 @@ router.post('/register', (req, res)=>{
 });
 router.delete('/logout', (req, res)=>{
     req.logout((err) => {
-        if (err) { return next(err); }
+        if(err){ return res.status(500).send(); }
     });
-    res.status(204);
+    res.status(204).send();
 });
 
 

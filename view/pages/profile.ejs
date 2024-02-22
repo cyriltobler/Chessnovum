@@ -11,27 +11,44 @@
 
     <link rel="stylesheet" href="/game/css/chessboard.css"></link>
     <link rel="stylesheet" href="/profile/css/chessboard.css"></link>
+    <link rel="stylesheet" href="/profile/css/bar.css"></link>
+    <link rel="stylesheet" href="/profile/css/style.css"></link>
 </head>
 <body>
     <header>
         <%- include('../components/header.ejs')%>
     </header>
+    <main>
+        <article>
+            <div class="profile">
+                <img src="/img/svg/profile.svg">
+                <h1 id="username">Namen</h1>
+            </div>
+        </article>
+        <article>
+            <section class="statistics">
+                <h4>Win condition</h4>
+                <div class="bar">
+                    <div class="bar-section" id="bar-section-win"><span id="bar-section-win-text"></span></div>
+                    <div class="bar-section" id="bar-section-draw"><span id="bar-section-draw-text"></span></div>
+                    <div class="bar-section" id="bar-section-lose"><span id="bar-section-lose-text"></span></div>
+                </div>
+            </section>
+        </article>
 
-    <article>
-        <h2>Namen</h2>
-    </article>
+        <article>
+            <h2>Aktuelle Partien</h2>
+            <section id="last-games" class="chessboard-wrapper"></section>
+        </article>
 
-    <article>
-        <h2>Aktuelle Partien</h2>
-        <section id="last-games" class="chessboard-wrapper"></section>
-    </article>
-
-    <article>
-        <h2>Beendete Partien</h2>
-        <section id="old-games" class="chessboard-wrapper"></section>
-    </article>
+        <article>
+            <h2>Beendete Partien</h2>
+            <section id="old-games" class="chessboard-wrapper"></section>
+        </article>
+    </main>
 
 
+    <script src="/profile/js/createProfile.js"></script>
     <script src="/profile/js/getGames.js"></script>
 </body>
 </html>

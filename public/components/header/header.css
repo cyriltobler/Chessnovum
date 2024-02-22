@@ -30,3 +30,8 @@
     height: 2rem;
     padding: 1rem;
 }
+
+.header-box-right{
+    display: flex;
+    flex-direction: row-reverse;
+}

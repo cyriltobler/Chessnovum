@@ -1,0 +1,15 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile{
+    display: flex;
+}
+.profile img{
+    width: 3rem;
+}
+.profile h1{
+    font-size: 3rem;
+}

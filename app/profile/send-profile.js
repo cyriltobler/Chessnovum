@@ -25,7 +25,9 @@ const sendProfile = async (req, res) => {
             const allGameData = {
                 id: game.id,
                 fen: game.FEN,
-                opponent: otherplayers[index][0].username
+                opponent: otherplayers[index][0].username,
+                gameStatus: game.gameStatus,
+                colorWhite: game.whiteplayer === userID
             }
             profileJSON.push(allGameData)
         })

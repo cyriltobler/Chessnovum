@@ -1,7 +1,29 @@
 .chessboard-wrapper{
-    display:flex;
+    display: grid;
+    grid-template-columns: auto auto auto;
+
 }
 
 .chessboard-box{
-    
+    width: 192px;
+
+    margin: 0.3rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+
+    color: black;
+    text-decoration: none;
+}
+.chessboard-box:hover{
+    scale: 1.02;
+    transition: scale 0.1s;
+}
+
+article{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+article h2{
+    margin-left: 1rem;
 }

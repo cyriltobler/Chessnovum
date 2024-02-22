@@ -15,8 +15,6 @@
             <img src="/img/svg/account.svg" id="header-profile">
         </button>
         <div class="dropdown-content">
-
-            <img src="/img/svg/account.svg" id="header-profile">
             <% if (username === null) { %>
                 <a href="/auth/register">Registrieren</a>
                 <a href="/auth/login">Login</a>
@@ -32,11 +30,19 @@
     function logout(){
         fetch('/auth/logout', {method: 'DELETE'}).then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Fehler: ${response.status}`);
             }
+        }).then(() => {
             location.reload();
         }).catch(error => {
-            alert('Fehler beim aus loggen: ' + error)
+            alert('Fehler beim aus loggen: ' + error);
         });
+        
+        
+        
+        /*
+        .catch(error => {
+            alert('Fehler beim aus loggen: ' + error)
+        });*/
     }
 </script>

@@ -6,7 +6,8 @@ const VIEW_PATH = '../view/';
 
 router.get('/', (req, res) => {
     const filePath = path.join(__dirname, VIEW_PATH, '/pages/index.ejs');
-    res.render(filePath);
+    //res.render(filePath);
+    res.redirect('/play')
 });
 
 

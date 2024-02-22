@@ -1,0 +1,31 @@
+.bar{
+    display: flex;
+    width: 80vw;
+    height: 1.3rem;
+
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.bar-section{
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bar-section span{
+    overflow: visible;
+    text-wrap: nowrap;
+    z-index: 98;
+}
+
+#bar-section-win{
+    background-color: green;
+}
+#bar-section-draw{
+    width: 100%;
+    background-color: white;
+}
+#bar-section-lose{
+    background-color: red;
+}
