@@ -15,6 +15,13 @@ async function getGames() {
         createNewBoard(game, htmlContainer, i);
     });
     createStatistics(games);
+
+    if (document.getElementById('last-games').children.length === 0) {
+        document.getElementById('last-games').innerHTML = 'Du hast keine Spiele am laufen';
+    }
+    if (document.getElementById('old-games').children.length === 0) {
+        document.getElementById('old-games').innerHTML = 'Du hast noch keine Spiele beendet';
+    }
 }
 
 function createNewBoard(game, htmlContainer, i) {

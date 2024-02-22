@@ -63,3 +63,7 @@ if (gameID !== undefined) {
 }
 
 loadBoard();
+
+window.addEventListener('offline', () => {
+    alert('Internet Verbindung getrennt');
+});

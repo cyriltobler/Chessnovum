@@ -3,6 +3,7 @@ const dbRequest = require('../db/db-request');
 
 const userPool = [];
 
+// create a new game
 const createGame = (io, socket) => {
     // add user in the pool
     userPool.push(socket.id);

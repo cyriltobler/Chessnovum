@@ -1,6 +1,5 @@
 document.getElementById('username').innerHTML = window.location.pathname.split('@')[1];
 
-
 const stats = {
     games: 0,
     win: 0,
@@ -10,19 +9,23 @@ const stats = {
 
 function createStatistics(games) {
     games.forEach((game) => {
-        console.log(game.colorWhite);
-        console.log(game.gameStatus);
         if (game.colorWhite && game.gameStatus === 1 || !game.colorWhite && game.gameStatus === 2) {
             stats.win++;
         } else if (game.colorWhite && game.gameStatus === 2 || !game.colorWhite && game.gameStatus === 1) {
             stats.lose++;
-        } else if(game.gameStatus === 3) {
+        } else if (game.gameStatus === 3) {
             stats.draw++;
         } else {
             return;
         }
         stats.games++;
     });
+
+    if (games.length === games.length - stats.win - stats.lose - stats.draw) {
+        document.getElementById('bar').innerHTML = 'Du hast noch keine Partie beendet';
+        document.getElementById('bar').style.width = 'fit-content';
+        return;
+    }
 
     document.getElementById('bar-section-win').style.width = `${stats.win / stats.games * 100}%`;
     document.getElementById('bar-section-win-text').innerHTML = `${Math.round(stats.win / stats.games * 100)}%(${stats.win})`;

@@ -20,7 +20,7 @@ const sendProfile = async (req, res) => {
         const userDataByUsernameQuery = 'SELECT * FROM `user` WHERE `username` = ?;';
         const user = await asyncDbRequest(userDataByUsernameQuery, req.params.username);
         if (user.length === 0) {
-            return res.status(404).send('user not found');
+            return res.status(404).json([]);
         }
         const userID = user[0].ID;
 
