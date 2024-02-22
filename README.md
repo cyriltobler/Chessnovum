@@ -18,4 +18,7 @@ XYZ
  ``` bash
     docker-composeup -d
  ```
- - 
+ - The last thing to do is to start the project
+``` bash
+    npm run start
+```
