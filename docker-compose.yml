@@ -12,7 +12,8 @@ services:
     ports:
       - "6033:3306"
     volumes:
-      - dbdata:/var/lib/mysql
+      #- dbdata:/var/lib/mysql
+      - ./ChessAppDatabase.sql:/docker-entrypoint-initdb.d/ChessAppDatabase.sql
     networks:
       - my_network
 
