@@ -28,3 +28,5 @@ SESSION_SECRET=secretkey
 ``` bash
     npm run start
 ```
+## Author
+- [Cyril Tobler](https://github.com/cyriltobler)
