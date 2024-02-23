@@ -1,0 +1,13 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+main{
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}

@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
+
+    <link rel="stylesheet" href="/auth/main.css">
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form action="/auth/login" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="username" required="">
-        <br>
-        <label for="password">Passwort:</label>
-        <input type="password" id="password" name="password" required="">
-        <br>
-        <button type="submit">Anmelden</button>
-        <a href="/auth/register">Registrieren</a>
-        <% if (messages.error) { %>
-            <%= messages.error %>
-                <% } %>
-    </form>
+    <main>
+        <h1>Login</h1>
+        <form action="/auth/login" method="post">
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="username" required="">
+            
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" name="password" required="">
+            <br>
+            <button type="submit">Anmelden</button><br>
+            <a href="/auth/register">Registrieren</a>
+            <% if (messages.error) { %>
+                <%= messages.error %>
+                    <% } %>
+        </form>
+    </main>
 </body>
 
 </html>
