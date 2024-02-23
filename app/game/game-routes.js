@@ -1,3 +1,11 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description game/game-routes.js - All routes for the game are managed in this file
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const express = require('express');
 const path = require('path');
 

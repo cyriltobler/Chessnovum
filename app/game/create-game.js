@@ -1,3 +1,11 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description game/create-game.js - A game is created in this file
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const { randomUUID } = require('node:crypto');
 const dbRequest = require('../db/db-request');
 

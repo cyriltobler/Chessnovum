@@ -1,3 +1,12 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description server.js - main file in which the server is started and the middleware and the
+ * individual routes are loaded.
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const express = require('express');
 const http = require('http');
 const session = require('express-session');

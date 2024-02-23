@@ -1,3 +1,11 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description game/send-game.js - Here, the game is skillfully played with all past moves.
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const dbRequest = require('../db/db-request');
 
 // send allmoves froma game

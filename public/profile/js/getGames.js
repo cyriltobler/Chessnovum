@@ -1,3 +1,12 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description In this file, a request is sent for the profile and
+ * then all data is displayed in the profile
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 async function getGames() {
     const username = window.location.pathname.split('@')[1];
 

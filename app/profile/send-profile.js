@@ -1,3 +1,11 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description profile/send-profile.js - This file collects the data for the profile and sends it
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const dbRequest = require('../db/db-request');
 
 // create a async DB request

@@ -1,3 +1,12 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description auth/passport-config.js - The standard functions of passport.js are
+ * implemented in this file
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const passport = require('passport');
 const dbRequest = require('../db/db-request');
 

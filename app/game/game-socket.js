@@ -1,3 +1,12 @@
+/**
+ * @author Cyril Tobler
+ * @version 1.0.0
+ * @since 23. Februar 2024
+ * @description game/game-socket.js - All socket.io requests are managed here
+ * and the corresponding function is called
+ * @see {@link https://github.com/cyriltobler} - GitHub-Profile from Cyril Tobler
+ */
+
 const { createGame, userPool } = require('./create-game');
 const validateMove = require('./validate-move');
 const sendGame = require('./send-game');
